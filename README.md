@@ -16,6 +16,21 @@ stay consistent.
 
 See [`demo/demo.pdf`](demo/demo.pdf) for every feature on one deck.
 
+## Gallery
+
+A few slides from the demo:
+
+|  |  |
+| :--: | :--: |
+| ![Cover](demo/shot-cover.png) | ![Typography](demo/shot-typography.png) |
+| **Cover** — `_class: cover` | **Typography** — hierarchy, inline code, `<mark>`, links |
+| ![Callouts](demo/shot-callouts.png) | ![Colour tints](demo/shot-tints.png) |
+| **Sober callouts** — plain & titled | **Opt-in tints** — `info / ok / warn / danger` |
+| ![Columns](demo/shot-columns.png) | ![Background image](demo/shot-background.png) |
+| **Columns** — flex layouts | **Background images** — native `![bg]` splits |
+| ![Syntax highlighting](demo/shot-code-dark.png) | ![Math](demo/shot-math.png) |
+| **Syntax highlighting** — Midnight variant | **KaTeX math** |
+
 ## Install
 
 Copy the two CSS files into your project (or add this repo as a submodule). The theme

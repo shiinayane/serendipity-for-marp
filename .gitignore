@@ -5,6 +5,7 @@
 .markdownlint.json
 
 # Marp / LaTeX build leftovers (the committed demo.pdf is intentional)
+*.html
 *.aux
 *.log
 /tmp/
