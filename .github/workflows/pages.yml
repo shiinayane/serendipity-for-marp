@@ -38,6 +38,8 @@ jobs:
           cp demo/demo-fig.png demo/bg-serendipity.png _site/
 
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true   # create/enable the Pages site if it doesn't exist yet
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
