@@ -1,0 +1,169 @@
+/*!
+ * serendipity — a sober, layout-capable Marp theme (Serendipity for Marp).
+ * Philosophy: restraint by default, customization by a few variables.
+ * Colours come from the shared Serendipity palette · offline system fonts (CJK-safe) · no CDN.
+ *
+ * @theme serendipity
+ * @auto-scaling true
+ * @size 16:9 1280px 720px
+ * @size 4:3 960px 720px
+ *
+ * COLOUR: lives in serendipity.css (imported below). Default = Morning (light);
+ *   put `class: midnight` (or `sunset`) in the deck front-matter for a dark variant.
+ * DENSITY / fonts: the non-colour knobs in :root below.
+ *   --theme-set serendipity-palette.css serendipity.css   (both files, palette first)
+ */
+
+@import 'serendipity-palette';
+
+:root {
+  /* ---- non-colour knobs (colours are mapped on `section` from the palette) ---- */
+  --radius:    10px;
+  --gap:       1.5rem;      /* column / block gap */
+  --pad:       54px;        /* slide padding */
+  --foot-h:    34px;        /* height of the accent foot band */
+  --on-accent: #ffffff;     /* text on the accent band (dark variants flip it below) */
+  --font: "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+          "Noto Sans JP", Arial, sans-serif;
+  --mono: "Menlo", "SFMono-Regular", "Consolas", monospace;
+  --fs:   26px;             /* base font size */
+}
+
+/* ===================== base ===================== */
+section {
+  /* roles ← Serendipity tokens — switch the whole palette with class: midnight / sunset */
+  --accent:   var(--se-blue);
+  --ink:      var(--se-ink);
+  --ink-soft: var(--se-ink-2);
+  --muted:    var(--se-muted);
+  --bg:       var(--se-bg);
+  --panel:    var(--se-surface);
+  --line:     var(--se-line);
+  --c-info:   var(--se-cornflower);  --c-ok:     var(--se-teal);
+  --c-warn:   var(--se-tangerine);   --c-danger: var(--se-coral);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs);
+  line-height: 1.5;
+  padding: var(--pad) var(--pad) calc(var(--foot-h) + 18px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   /* top-aligned, not vertically centered */
+  letter-spacing: .005em;
+  box-shadow: inset 0 4px 0 var(--accent);   /* thin top accent line (frames the slide) */
+}
+section > *:first-child { margin-top: 0; }
+
+/* headings — slide title = `#` (h1); `##` = a sub-heading */
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; color: var(--ink); margin: .1em 0 .35em; }
+h1 { font-size: 1.55em; }                       /* slide title */
+h1::after {                                      /* quiet accent underline on the title */
+  content: ""; display: block; width: 2.2em; height: 3px;
+  background: var(--accent); margin-top: .28rem; border-radius: 2px;
+}
+h2 { font-size: 1.15em; color: var(--ink-soft); }
+h3 { font-size: 1.0em;  color: var(--ink-soft); font-weight: 600; }
+
+p, li { margin: .28em 0; }
+strong { font-weight: 700; color: var(--ink); }          /* bold = emphasis, not color noise */
+em { font-style: italic; }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--line); }
+ul, ol { padding-left: 1.2em; }
+li::marker { color: var(--accent); }                      /* the one splash of accent in lists */
+.muted { color: var(--muted); }
+.small { font-size: .82em; color: var(--ink-soft); }
+.large { font-size: 1.18em; }
+
+/* inline + block code */
+code { font-family: var(--mono); font-size: .9em; background: var(--panel);
+       padding: .08em .35em; border-radius: 6px; }
+pre { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: .7em .9em; overflow: auto; }
+pre code { background: none; padding: 0; }
+
+/* ===================== callout (one box, sober) ===================== */
+/* `> text`  or  `> #### Title \n > body`  → a clean accent-bordered callout. */
+blockquote {
+  margin: .5em 0; padding: .55em .9em;
+  background: var(--panel); border-left: 4px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0; color: var(--ink);
+}
+blockquote h4 { margin: 0 0 .15em; color: var(--accent); font-size: .95em; }
+blockquote > :last-child { margin-bottom: 0; }
+/* opt-in tints (add the class on the slide): keeps colour deliberate, never automatic */
+section.info   blockquote { border-left-color: var(--c-info); }
+section.ok     blockquote { border-left-color: var(--c-ok); }
+section.warn   blockquote { border-left-color: var(--c-warn); }
+section.danger blockquote { border-left-color: var(--c-danger); }
+section.warn   blockquote h4 { color: var(--c-warn); }
+section.danger blockquote h4 { color: var(--c-danger); }
+
+/* ===================== tables (full width, booktabs feel) ===================== */
+table { width: 100%; border-collapse: collapse; font-size: .92em; margin: .4em 0; }
+th, td { padding: .35em .7em; text-align: left; }
+thead th { border-bottom: 2px solid var(--ink); color: var(--accent); }
+tbody td { border-bottom: 1px solid var(--line); }
+tbody tr:last-child td { border-bottom: 2px solid var(--ink); }
+
+/* ===================== images / figures ===================== */
+img { max-width: 100%; height: auto; }                 /* no width cap (neobeam's 50% is gone) */
+img[alt~="center"] { display: block; margin-inline: auto; }
+img[alt~="right"]  { float: right; margin: 0 0 .5em 1em; }
+img[alt~="left"]   { float: left;  margin: 0 1em .5em 0; }
+.caption { color: var(--ink-soft); font-size: .8em; text-align: center; margin-top: .2em; }
+
+/* ===================== columns (simple flex, not rigid grids) ===================== */
+.cols, .cols-3 { display: flex; gap: var(--gap); align-items: flex-start; }
+.cols > *, .cols-3 > * { flex: 1; min-width: 0; }
+.cols.uneven > *:first-child { flex: 1.6; }            /* ~60/40 */
+.cols.uneven > *:last-child  { flex: 1; }
+
+/* ===================== header / footer / pagination ===================== */
+header { position: absolute; top: 22px; left: var(--pad); right: var(--pad);
+         color: var(--ink-soft); font-size: .58em; letter-spacing: .02em; }
+
+/* the signature: a slim accent band along the bottom, carrying footer + page number */
+section::before {           /* the band itself (always present on content slides) */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: var(--foot-h); background: var(--accent); }
+footer {                    /* footer text, on the band, left */
+  position: absolute; left: var(--pad); bottom: 0; height: var(--foot-h);
+  display: flex; align-items: center;
+  color: var(--on-accent); opacity: .95; font-size: .56em; letter-spacing: .02em; }
+section::after {            /* pagination, on the band, right */
+  position: absolute; right: var(--pad); bottom: 0; height: var(--foot-h);
+  display: flex; align-items: center;
+  color: var(--on-accent); opacity: .95; font-size: .56em; }
+
+/* slides without the foot band / top line: cover, lead, and (its own top bar) nav */
+section.cover, section.lead {
+  box-shadow: none; padding: var(--pad); }
+section.cover::before, section.lead::before,
+section.cover::after,  section.lead::after  { display: none; content: none; }
+section.cover footer,  section.lead footer  { display: none; }
+section.nav { box-shadow: none; }   /* nav has its own top bar */
+/* dark variants: the foot band is the (lighter) accent, so band text flips to the dark bg */
+section.midnight, section.sunset { --on-accent: var(--se-bg); }
+
+/* ===================== cover  (<!-- _class: cover -->) ===================== */
+section.cover { justify-content: center; padding-left: calc(var(--pad) + 6px); }
+section.cover h1 { font-size: 2.3em; line-height: 1.12; }
+section.cover h1::after { width: 3em; height: 5px; margin-top: .5rem; }
+section.cover h2 { color: var(--ink-soft); font-weight: 500; font-size: 1.1em; margin-top: .1em; }
+section.cover p  { color: var(--ink-soft); font-size: .82em; margin: .15em 0; }
+
+/* ===================== section divider (<!-- _class: lead -->) ===================== */
+section.lead { justify-content: center; }
+section.lead h1 { font-size: 2.0em; }
+
+/* ===================== top accent rail on a "nav" slide (optional) =====================
+   Use <!-- _class: nav --> + a `header:` to get a quiet top label bar. */
+section.nav header { top: 0; left: 0; right: 0; padding: 10px var(--pad);
+  background: var(--panel); border-bottom: 2px solid var(--accent);
+  color: var(--ink); font-size: .56em; }
+section.nav { padding-top: calc(var(--pad) + 8px); }
+
+/* ---- DARK VARIANT (light-only for now): to add later, flip these five and ship a `dark` class.
+section.dark { --bg:#161b22; --ink:#e6e9ee; --ink-soft:#9aa4b2; --panel:#1f2730; --line:#2b333d; }
+*/

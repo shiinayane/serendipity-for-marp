@@ -1,0 +1,66 @@
+/* @theme serendipity-palette
+ *
+ * Shared colour tokens for all my Marp themes — the single source of truth.
+ * Source palette: github.com/Serendipity-Theme/color-palette  (Morning / Midnight / Sunset).
+ *
+ * Themes `@import 'serendipity'` and map their roles onto these `--se-*` tokens
+ * (so recolouring a deck = swapping the variant, never editing the theme rules).
+ *
+ * Default = Morning (light). For a dark deck, set in the markdown front-matter:
+ *     class: midnight     (cool, blue)        or     class: sunset   (warm, violet)
+ * which applies the variant to every slide.
+ *
+ * Build: pass BOTH files to --theme-set, e.g.
+ *     --theme-set meetings/themes/serendipity-palette.css meetings/themes/serendipity.css
+ */
+
+:root {
+  /* ---------- Morning (light) — default ---------- */
+  --se-bg:        #fdfdfe;  /* white            page background        */
+  --se-surface:   #f1f1f4;  /* cultured         panels / code / callout */
+  --se-surface-2: #e6e7ee;  /* (cultured↔gainsboro) raised surface     */
+  --se-line:      #d8dae4;  /* gainsboro        hairlines / rules       */
+  --se-ink:       #4e5377;  /* independence     primary text            */
+  --se-ink-2:     #5f6488;  /* dark-blue-gray   secondary text          */
+  --se-muted:     #8388ad;  /* cool-grey        captions / disabled     */
+  --se-blue:      #3788be;  /* green-blue-crayola  PRIMARY ACCENT       */
+  --se-cornflower:#7397de;  /* cornflower-blue  info                    */
+  --se-purple:    #886cdb;  /* medium-purple    highlight / link-alt    */
+  --se-teal:      #77aab3;  /* cadet-blue       ok / success            */
+  --se-coral:     #d26a5d;  /* fuzzy-wuzzy      danger                  */
+  --se-tangerine: #f19a8e;  /* vivid-tangerine  warning                 */
+}
+
+/* ---------- Midnight (dark, cool) — class: midnight ---------- */
+section.midnight {
+  --se-bg:        #151726;  /* xiketic        */
+  --se-surface:   #1c1e2d;  /* raisin-black   */
+  --se-surface-2: #232534;  /* raisin-black-2 */
+  --se-line:      #3e404f;  /* charcoal       */
+  --se-ink:       #dee0ef;  /* lavender-web   */
+  --se-ink-2:     #8d8f9e;  /* roman-silver   */
+  --se-muted:     #6b6d7c;  /* rhythm         */
+  --se-blue:      #5ba2d0;  /* carolina-blue  */
+  --se-cornflower:#94b8ff;  /* french-sky-blue*/
+  --se-purple:    #a78bfa;  /* lavender-floral*/
+  --se-teal:      #9ccfd8;  /* light-blue     */
+  --se-coral:     #ee8679;  /* congo-pink     */
+  --se-tangerine: #f8d2c9;  /* pale-pink      */
+}
+
+/* ---------- Sunset (dark, violet) — class: sunset ---------- */
+section.sunset {
+  --se-bg:        #202231;  /* raisin-black     */
+  --se-surface:   #272938;  /* raisin-black-2   */
+  --se-surface-2: #363847;  /* charcoal         */
+  --se-line:      #414354;  /* independence     */
+  --se-ink:       #dee0ef;  /* lavender-web     */
+  --se-ink-2:     #8d8f9e;  /* roman-silver     */
+  --se-muted:     #6b6d7c;  /* rhythm           */
+  --se-blue:      #709bbd;  /* cerulean-frost   */
+  --se-cornflower:#a0b6e8;  /* wild-blue-yonder */
+  --se-purple:    #a392dc;  /* blue-bell        */
+  --se-teal:      #aac9d4;  /* light-blue       */
+  --se-coral:     #d1918f;  /* new-york-pink    */
+  --se-tangerine: #edd5d6;  /* pale-pink        */
+}

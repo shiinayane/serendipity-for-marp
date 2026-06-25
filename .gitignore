@@ -1,0 +1,9 @@
+# OS / editor junk
+.DS_Store
+*.swp
+.vscode/
+
+# Marp / LaTeX build leftovers (the committed demo.pdf is intentional)
+*.aux
+*.log
+/tmp/
