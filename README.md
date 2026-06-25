@@ -14,7 +14,9 @@ stay consistent.
 | -------------------------------- | ---------------------------------- |
 | ![light](demo/preview-light.png) | ![dark](demo/preview-midnight.png) |
 
-See [`demo/demo.pdf`](demo/demo.pdf) for every feature on one deck.
+See [`demo/demo.pdf`](demo/demo.pdf) for every feature on one deck, or flip through it live:
+
+**▶ [serendipity demo — live preview](https://shiinayane.github.io/serendipity-for-marp/)** · use ← / → to navigate
 
 ## Gallery
 
@@ -31,19 +33,33 @@ A few slides from the demo:
 | ![Syntax highlighting](demo/shot-code-dark.png) | ![Math](demo/shot-math.png) |
 | **Syntax highlighting** — Midnight variant | **KaTeX math** |
 
-## Install
+## Install (VS Code)
 
-Copy the two CSS files into your project (or add this repo as a submodule). The theme
-`@import`s the palette, so **pass both to `--theme-set`, palette first**:
+Install the [Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode)
+extension, then register **both** CSS files (palette first — the theme `@import`s it) under
+`markdown.marp.themes`. Two ways:
 
-```bash
-marp deck.md -o deck.pdf \
-  --theme-set css/serendipity-palette.css css/serendipity.css --allow-local-files
+**A · Straight from this repo, no download** — point at the raw URLs:
+
+```jsonc
+// .vscode/settings.json (per-project)  or  your User settings.json
+"markdown.marp.themes": [
+  "https://raw.githubusercontent.com/shiinayane/serendipity-for-marp/main/css/serendipity-palette.css",
+  "https://raw.githubusercontent.com/shiinayane/serendipity-for-marp/main/css/serendipity.css"
+]
 ```
 
-On **Overleaf/VS Code (Marp extension)**: register both CSS paths in the Marp themes setting.
+**B · Local files** — clone this repo (or copy its `css/` folder into your project), then use
+relative paths:
 
-In your deck's front-matter:
+```jsonc
+"markdown.marp.themes": [
+  "./css/serendipity-palette.css",
+  "./css/serendipity.css"
+]
+```
+
+Then add the front-matter to your deck and toggle the **Marp** preview on:
 
 ```yaml
 ---
@@ -53,6 +69,13 @@ paginate: true
 # class: midnight     # optional: dark variant (or: sunset)
 ---
 ```
+
+> **Export to PDF / PPTX** with the CLI — pass both files to `--theme-set`, palette first:
+>
+> ```bash
+> marp deck.md -o deck.pdf \
+>   --theme-set css/serendipity-palette.css css/serendipity.css --allow-local-files
+> ```
 
 ## Two files, one idea
 
@@ -91,6 +114,11 @@ To add a new variant, copy a `section.<name> { --se-* … }` block in the palett
 
 ## Good to know
 
+- **Live preview** — `demo/demo.md` is built to an HTML deck and published to GitHub Pages by
+  [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on every push to `main`, so the
+  [live link](https://shiinayane.github.io/serendipity-for-marp/) always reflects the current theme.
+  Enable it once under the repo's **Settings → Pages → Source = "GitHub Actions"**. (The local
+  `index.html` is just a build artifact — it's git-ignored; the Action regenerates it in CI.)
 - **Incremental reveal** is a Marp Core feature, not a theme one: start list items with `*` (unordered)
   or `1)` (ordered) to reveal them one at a time. It only animates in the **HTML presenter** — a PDF or
   PPTX export shows every item at once. The theme styles them identically either way.
