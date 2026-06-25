@@ -6,11 +6,12 @@ variables.** Read this before editing.
 ## Files
 
 ```
-serendipity-palette.css   @theme serendipity-palette — colour tokens only (--se-*), 3 variants
-serendipity.css           @theme serendipity         — the theme: @import palette + role map + layout
-demo/demo.md              feature demo (source of truth for "does it still look right")
-demo/demo.pdf             built demo
-demo/preview-*.png        README screenshots (light + midnight)
+css/serendipity-palette.css   @theme serendipity-palette — colour tokens only (--se-*), 3 variants
+css/serendipity.css           @theme serendipity         — the theme: @import palette + role map + layout
+demo/demo.md                  feature demo (source of truth for "does it still look right")
+demo/demo.pdf                 built demo
+demo/bg-serendipity.png       demo background image (Serendipity-palette aurora)
+demo/preview-*.png            README screenshots (light + midnight)
 ```
 
 ## The architecture (do not break)
@@ -41,7 +42,7 @@ table header, `blockquote h4`. `--on-accent` (band text) is white; flipped to `-
 
 ```bash
 marp demo/demo.md -o demo/demo.pdf \
-  --theme-set serendipity-palette.css serendipity.css --allow-local-files
+  --theme-set css/serendipity-palette.css css/serendipity.css --allow-local-files
 
 # self-check: render pages and READ them (PDFs can't be eyeballed inline)
 python3 -c "import fitz;d=fitz.open('demo/demo.pdf');[d[i].get_pixmap(matrix=fitz.Matrix(1.4,1.4)).save(f'/tmp/p{i+1:02d}.png') for i in range(d.page_count)]"

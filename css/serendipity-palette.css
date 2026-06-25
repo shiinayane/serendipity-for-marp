@@ -11,14 +11,14 @@
  * which applies the variant to every slide.
  *
  * Build: pass BOTH files to --theme-set, e.g.
- *     --theme-set meetings/themes/serendipity-palette.css meetings/themes/serendipity.css
+ *     --theme-set css/serendipity-palette.css css/serendipity.css
  */
 
 :root {
   /* ---------- Morning (light) — default ---------- */
   --se-bg:        #fdfdfe;  /* white            page background        */
   --se-surface:   #f1f1f4;  /* cultured         panels / code / callout */
-  --se-surface-2: #e6e7ee;  /* (cultured↔gainsboro) raised surface     */
+  --se-surface-2: #d8dae4;  /* gainsboro         raised surface         */
   --se-line:      #d8dae4;  /* gainsboro        hairlines / rules       */
   --se-ink:       #4e5377;  /* independence     primary text            */
   --se-ink-2:     #5f6488;  /* dark-blue-gray   secondary text          */
@@ -29,6 +29,10 @@
   --se-teal:      #77aab3;  /* cadet-blue       ok / success            */
   --se-coral:     #d26a5d;  /* fuzzy-wuzzy      danger                  */
   --se-tangerine: #f19a8e;  /* vivid-tangerine  warning                 */
+  /* code tokens — from the Serendipity VS Code theme (serendipity-morning) */
+  --se-code-comment:#6d7296; --se-code-keyword:#2f7aab; --se-code-string:#785fd0;
+  --se-code-num:#e58678;     --se-code-type:#6288d8;    --se-code-attr:#629aa5;
+  --se-link:#629aa5;  --se-inline:#785fd0;  /* md textLink / textPreformat (links · inline code) */
 }
 
 /* ---------- Midnight (dark, cool) — class: midnight ---------- */
@@ -46,6 +50,9 @@ section.midnight {
   --se-teal:      #9ccfd8;  /* light-blue     */
   --se-coral:     #ee8679;  /* congo-pink     */
   --se-tangerine: #f8d2c9;  /* pale-pink      */
+  --se-code-comment:#6b6d7c; --se-code-keyword:#5ba2d0; --se-code-string:#a78bfa;
+  --se-code-num:#f8d2c9;     --se-code-type:#94b8ff;    --se-code-attr:#9ccfd8;
+  --se-link:#9ccfd8;  --se-inline:#a78bfa;
 }
 
 /* ---------- Sunset (dark, violet) — class: sunset ---------- */
@@ -63,4 +70,7 @@ section.sunset {
   --se-teal:      #aac9d4;  /* light-blue       */
   --se-coral:     #d1918f;  /* new-york-pink    */
   --se-tangerine: #edd5d6;  /* pale-pink        */
+  --se-code-comment:#8d8f9e; --se-code-keyword:#709bbd; --se-code-string:#a392dc;
+  --se-code-num:#d6b4b4;     --se-code-type:#a0b6e8;    --se-code-attr:#aac9d4;
+  --se-link:#aac9d4;  --se-inline:#a392dc;
 }

@@ -1,0 +1,212 @@
+/*!
+ * serendipity — a sober, layout-capable Marp theme (Serendipity for Marp).
+ * Philosophy: restraint by default, customization by a few variables.
+ * Colours come from the shared Serendipity palette · offline system fonts (CJK-safe) · no CDN.
+ *
+ * @theme serendipity
+ * @auto-scaling true
+ * @size 16:9 1280px 720px
+ * @size 4:3 960px 720px
+ *
+ * COLOUR: lives in serendipity.css (imported below). Default = Morning (light);
+ *   put `class: midnight` (or `sunset`) in the deck front-matter for a dark variant.
+ * DENSITY / fonts: the non-colour knobs in :root below.
+ *   --theme-set css/serendipity-palette.css css/serendipity.css   (both files, palette first)
+ */
+
+@import 'serendipity-palette';
+
+:root {
+  /* ---- non-colour knobs (colours are mapped on `section` from the palette) ---- */
+  --radius:    10px;
+  --gap:       1.5rem;      /* column / block gap */
+  --pad:       54px;        /* slide padding */
+  --font: "Helvetica Neue", system-ui, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+          "Noto Sans JP", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --mono: "Menlo", "SFMono-Regular", "Consolas", monospace;
+  --fs:   26px;             /* base font size */
+}
+
+/* ===================== base ===================== */
+section {
+  /* roles ← Serendipity tokens — switch the whole palette with class: midnight / sunset */
+  --accent:   var(--se-blue);     /* functional accent: markers, table head, callout edge, foot rule */
+  --rule:     var(--se-tangerine);/* title underline — warm pop for vitality */
+  --ink:      var(--se-ink);
+  --ink-soft: var(--se-ink-2);
+  --muted:    var(--se-muted);
+  --bg:       var(--se-bg);
+  --panel:    var(--se-surface);
+  --line:     var(--se-line);
+  --c-info:   var(--se-cornflower);  --c-ok:     var(--se-teal);
+  --c-warn:   var(--se-tangerine);   --c-danger: var(--se-coral);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs);
+  line-height: 1.5;
+  padding: var(--pad) var(--pad) 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   /* top-aligned, not vertically centered */
+  letter-spacing: .005em;
+}
+section > *:first-child { margin-top: 0; }
+
+/* headings — slide title = `#` (h1); `##` = a sub-heading. A modular ~1.25 step keeps the
+   levels distinct, and the margins follow proximity: each heading hugs its own body, parts
+   from the block above. */
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; color: var(--ink); }
+h1 { font-size: 1.7em; margin: 0 0 .4em; }       /* slide title — most air below */
+h1::after {                                       /* quiet accent underline on the title */
+  content: ""; display: block; width: 2.2em; height: 3px;
+  background: var(--rule); margin-top: .28rem; border-radius: 2px;
+}
+h2 { font-size: 1.25em; color: var(--ink-soft); margin: .55em 0 .25em; }
+h3 { font-size: 1.0em;  color: var(--ink-soft); font-weight: 600; margin: .5em 0 .2em;
+     letter-spacing: .04em; text-transform: uppercase; }   /* tracked eyebrow, not body-sized noise */
+section > h1:first-child, section > h2:first-child, section > h3:first-child { margin-top: 0; }
+
+p, li { margin: .28em 0; }
+li { line-height: 1.4; margin: .32em 0; }                   /* tighter inside a bullet, a touch more between */
+li > ul, li > ol { margin: .2em 0; }                        /* nested lists breathe less */
+li li { font-size: .94em; }                                 /* gentle step-down at depth */
+strong { font-weight: 700; color: var(--ink); }          /* bold = emphasis, not color noise */
+em { font-style: italic; }
+a { color: var(--se-link); text-decoration: none; }   /* Serendipity textLink; clean like VS Code md */
+a:hover { text-decoration: underline; }
+ul, ol { padding-left: 1.2em; margin: .3em 0; }   /* even rhythm: match paragraph spacing, not the big browser default */
+li::marker { color: var(--accent); }                      /* the one splash of accent in lists */
+.muted { color: var(--muted); }
+.small { font-size: .82em; color: var(--ink-soft); }
+.large { font-size: 1.18em; }
+
+/* inline + block code */
+/* inline code: a deeper, self-contrasting chip (surface-2) so it reads on the slide AND inside
+   a panel-coloured callout — no per-context special-casing needed (VS Code idea). */
+code { font-family: var(--mono); font-size: .9em; background: var(--se-surface-2);
+       padding: .08em .35em; border-radius: 6px; }
+:not(pre) > code { color: var(--se-inline); }   /* inline code = Serendipity textPreformat (purple) */
+pre { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: .7em .9em; overflow: auto; line-height: 1.4; }   /* tighter than body — code reads as a block */
+pre code { background: none; padding: 0; line-height: 1.4; }
+mark { background: color-mix(in srgb, var(--rule) 38%, transparent);   /* a calm highlighter, palette-tinted */
+       color: inherit; padding: .03em .25em; border-radius: 4px; }
+/* syntax highlighting — token colours from the Serendipity VS Code theme (per-variant) */
+.hljs-comment, .hljs-quote                              { color: var(--se-code-comment); font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-literal        { color: var(--se-code-keyword); }
+.hljs-built_in, .hljs-type, .hljs-class .hljs-title,
+.hljs-name, .hljs-tag                                   { color: var(--se-code-type); }
+.hljs-string, .hljs-regexp, .hljs-meta .hljs-string     { color: var(--se-code-string); }
+.hljs-number, .hljs-symbol, .hljs-bullet                { color: var(--se-code-num); }
+.hljs-title, .hljs-title.function_                       { color: var(--se-code-num); }
+.hljs-attr, .hljs-attribute, .hljs-selector-class,
+.hljs-params                                            { color: var(--se-code-attr); font-style: italic; }
+.hljs-variable, .hljs-property                          { color: var(--ink); }
+.hljs-meta, .hljs-doctag                                { color: var(--muted); }
+.hljs-emphasis { font-style: italic; }  .hljs-strong { font-weight: 700; }
+
+/* ===================== callout (one box, sober) ===================== */
+/* `> text`  or  `> #### Title \n > body`  → a clean accent-bordered callout. */
+blockquote {
+  margin: .5em 0; padding: .55em .9em;
+  background: var(--panel); border-left: 4px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0; color: var(--ink);
+}
+blockquote h4 { margin: 0 0 .15em; color: var(--accent); font-size: .95em; }
+blockquote > :last-child { margin-bottom: 0; }
+/* opt-in tints (add the class on the slide): keeps colour deliberate, never automatic */
+section.info   blockquote { border-left-color: var(--c-info); }
+section.ok     blockquote { border-left-color: var(--c-ok); }
+section.warn   blockquote { border-left-color: var(--c-warn); }
+section.danger blockquote { border-left-color: var(--c-danger); }
+section.warn   blockquote h4 { color: var(--c-warn); }
+section.danger blockquote h4 { color: var(--c-danger); }
+
+/* ===================== tables (full width, booktabs feel) ===================== */
+table { width: 100%; border-collapse: collapse; font-size: .92em; margin: .4em 0; }
+th, td { padding: .5em .8em; text-align: left; line-height: 1.35; }   /* booktabs breathes via row spacing, not rules */
+thead th { border-bottom: 2px solid var(--ink); color: var(--accent); padding-bottom: .45em; }
+tbody td { border-bottom: 1px solid var(--line); }
+tbody tr:last-child td { border-bottom: 2px solid var(--ink); }
+
+/* ===================== images / figures ===================== */
+img { max-width: 100%; height: auto; }                 /* no width cap (neobeam's 50% is gone) */
+img[alt~="center"] { display: block; margin-inline: auto; }
+img[alt~="right"]  { float: right; margin: 0 0 .5em 1em; }
+img[alt~="left"]   { float: left;  margin: 0 1em .5em 0; }
+.caption { color: var(--ink-soft); font-size: .8em; text-align: center; margin-top: .2em; }
+
+/* ===================== columns (simple flex, not rigid grids) ===================== */
+.cols, .cols-3 { display: flex; gap: var(--gap); align-items: flex-start; }
+.cols > *, .cols-3 > * { flex: 1; min-width: 0; }
+.cols.uneven > *:first-child { flex: 1.6; }            /* ~60/40 */
+.cols.uneven > *:last-child  { flex: 1; }
+
+/* ===================== header / footer / pagination ===================== */
+/* the foot band: a thin accent hairline, then footer text (left) + page number (right) tucked
+   *below* it — small enough to give breathing room without eating slide space.
+   --foot-y  = baseline band height the text/number sit in (anchored to the slide bottom)
+   --foot-gap = breathing room between the hairline and that band */
+:root { --foot-y: 14px; --foot-gap: 8px; --foot-pad: 7px; }
+header { position: absolute; top: 22px; left: var(--pad); right: var(--pad);
+         color: var(--ink-soft); font-size: .58em; letter-spacing: .02em; }
+
+section::before {           /* the hairline — sits just above the foot band */
+  content: ""; position: absolute; left: var(--pad); right: var(--pad);
+  bottom: calc(var(--foot-pad) + var(--foot-y) + var(--foot-gap));
+  height: 2px; background: var(--accent); opacity: .85; }
+footer {                    /* footer text — below the line, left; multiple <span>s become fields */
+  position: absolute; left: var(--pad); right: var(--pad); bottom: var(--foot-pad);
+  height: var(--foot-y); display: flex; align-items: center; gap: 1.4em;
+  color: var(--muted); font-size: .5em; letter-spacing: .02em; }
+section::after {            /* page number — below the line, right */
+  content: attr(data-marpit-pagination);
+  padding: 0;                /* override Marp's `padding:inherit`, which would push it up by --pad */
+  position: absolute; right: var(--pad); bottom: var(--foot-pad);
+  height: var(--foot-y); display: flex; align-items: center; justify-content: flex-end;
+  color: var(--muted); font-size: .5em; }
+
+/* slides without the foot band / top line: cover, lead, thanks, and (its own top bar) nav */
+section.cover, section.lead, section.thanks {
+  box-shadow: none; padding: var(--pad); }
+section.cover::before, section.lead::before, section.thanks::before,
+section.cover::after,  section.lead::after,  section.thanks::after  { display: none; content: none; }
+section.cover footer,  section.lead footer,  section.thanks footer   { display: none; }
+/* background-image slides (Marpit `![bg]` / `![bg left|right]`) are visual feature pages — drop the
+   foot chrome so the hairline + page number never clash with the image. Marpit tags every layer of
+   such a slide with this attribute, so it auto-applies with no manual class. */
+section[data-marpit-advanced-background]::before,
+section[data-marpit-advanced-background]::after  { display: none; content: none; }
+section[data-marpit-advanced-background] footer   { display: none; }
+section.nav { box-shadow: none; }   /* nav has its own top bar */
+
+/* ===================== cover  (<!-- _class: cover -->) ===================== */
+section.cover { justify-content: center; padding-left: calc(var(--pad) + 6px); }
+section.cover h1 { font-size: 2.3em; line-height: 1.12; }
+section.cover h1::after { width: 3em; height: 5px; margin-top: .5rem; }
+section.cover h2 { color: var(--ink-soft); font-weight: 500; font-size: 1.1em; margin-top: .1em; }
+section.cover p  { color: var(--ink-soft); font-size: .82em; margin: .15em 0; }
+
+/* ===================== section divider (<!-- _class: lead -->) ===================== */
+section.lead { justify-content: center; }
+section.lead h1 { font-size: 2.0em; }
+
+/* ===================== closing / thanks (<!-- _class: thanks -->) ===================== */
+section.thanks { justify-content: center; align-items: center; text-align: center; }
+section.thanks h1 { font-size: 2.2em; }
+section.thanks h1::after { margin-left: auto; margin-right: auto; }   /* centre the underline */
+section.thanks p { color: var(--ink-soft); font-size: .9em; margin: .25em 0; }
+section.thanks a { color: var(--se-link); }
+
+/* ===================== top accent rail on a "nav" slide (optional) =====================
+   Use <!-- _class: nav --> + a `header:` to get a quiet top label bar. */
+section.nav header {            /* a quiet tracked eyebrow nav, not a toolbar slab */
+  top: 0; left: 0; right: 0; padding: 17px var(--pad) 10px;
+  background: none; border-bottom: 1px solid var(--line);
+  color: var(--muted); font-size: .46em; font-weight: 500;
+  letter-spacing: .15em; text-transform: uppercase; }
+section.nav header strong { color: var(--ink); font-weight: 700; }  /* the current section */
+section.nav { padding-top: calc(var(--pad) + 4px); }
+
+/* Dark variants are the palette's `midnight` / `sunset` (front-matter `class:`) — no extra rule needed. */
