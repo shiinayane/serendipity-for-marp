@@ -230,16 +230,16 @@ Marpit's **native** background syntax splits the slide — no wrapper `<div>` ne
 ---
 
 <!-- _class: nav -->
-<!-- header: 'Motivation · **Method** · Results · Conclusion' -->
+<!-- header: '**Motivation** ***Method*** **Results** **Conclusion**' -->
 <!-- _footer: '***Your Name*** **Method** **Results** **2026**' -->
 
 # Optional top nav
 
-Add `<!-- _class: nav -->` plus a `header:` to get a quiet section nav
-(bold the current one). Useful for longer talks.
+Add `<!-- _class: nav -->` plus a `header:` to get a quiet section nav.
+Useful for longer talks.
 
-> A tracked eyebrow up top with the current section in bold — and the **footer** here is fields
-> written as Markdown `**…**` segments, dot-bead separated; `***…***` emphasises one (the byline).
+> Header and footer share one syntax: each `**…**` is a dot-bead-separated field, and `***…***`
+> marks the active section (here) or emphasises a field (the byline below). No hand-typed `·`.
 
 ---
 

@@ -95,8 +95,9 @@ Switch the whole deck's palette with one front-matter line: `class: midnight` or
 - **Syntax-highlighted code** (highlight.js tokens mapped to the palette) and **KaTeX math**
 - **One sober callout** — a blockquote; add `#### Title` for a titled box; opt-in tints via
   `_class: info | ok | warn | danger` (colour is never automatic)
-- **Quiet footer** — a thin accent rule above muted footer text + page number; multi-field footers
-  (`footer:` with several `<span>`s); optional top nav (`_class: nav` + `header:`)
+- **Quiet footer** — a thin accent rule above muted footer text + `n / total`; the footer and the
+  optional top nav (`_class: nav` + `header:`) share one syntax: each `**…**` is a dot-bead-separated
+  field, `***…***` emphasises one (footer byline) or marks the active section (nav)
 - `.muted` / `.small` / `.large`, `<mark>` highlight, image `.caption`, `![center|left|right]` alignment
 - **Offline, CJK-safe fonts** (system stack + Hiragino/Noto fallback) — no CDN, no web fonts
 
