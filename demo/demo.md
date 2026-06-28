@@ -231,15 +231,15 @@ Marpit's **native** background syntax splits the slide — no wrapper `<div>` ne
 
 <!-- _class: nav -->
 <!-- header: 'Motivation · **Method** · Results · Conclusion' -->
-<!-- _footer: '<span>Your Name</span><span>Method · Results</span><span>2026</span>' -->
+<!-- _footer: '***Your Name*** **Method** **Results** **2026**' -->
 
 # Optional top nav
 
 Add `<!-- _class: nav -->` plus a `header:` to get a quiet section nav
 (bold the current one). Useful for longer talks.
 
-> A tracked eyebrow up top with the current section in bold — and the **footer** here is three
-> `<span>` fields (`Name · Topic · Year`) that space out automatically.
+> A tracked eyebrow up top with the current section in bold — and the **footer** here is fields
+> written as Markdown `**…**` segments, dot-bead separated; `***…***` emphasises one (the byline).
 
 ---
 

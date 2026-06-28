@@ -156,12 +156,20 @@ section::before {           /* the hairline — sits just above the foot band */
   content: ""; position: absolute; left: var(--pad); right: var(--pad);
   bottom: calc(var(--foot-pad) + var(--foot-y) + var(--foot-gap));
   height: 2px; background: var(--accent); opacity: .85; }
-footer {                    /* footer text — below the line, left; multiple <span>s become fields */
+footer {                    /* footer text — below the line, left; each field = one child element */
   position: absolute; left: var(--pad); right: var(--pad); bottom: var(--foot-pad);
-  height: var(--foot-y); display: flex; align-items: center; gap: 1.4em;
-  color: var(--muted); font-size: .5em; letter-spacing: .02em; }
-section::after {            /* page number — below the line, right */
-  content: attr(data-marpit-pagination);
+  height: var(--foot-y); display: flex; align-items: center; gap: 0;
+  color: var(--muted); font-size: .5em; letter-spacing: .07em; }
+/* fields: write each atom as a Markdown `**…**` segment — each becomes one child, evenly separated
+   by a small dot bead (no hand-typed `·` needed). Emphasis is per-field and opt-in: `***…***`
+   (triple-star) → bold ink; plain `**…**` stays muted. */
+footer > * { font-weight: inherit; color: inherit; }
+footer > * + *::before {        /* round dot bead between fields */
+  content: ""; display: inline-block; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--muted); opacity: .55; margin: 0 .82em; vertical-align: middle; }
+footer em { font-style: normal; }   /* `***…***`: keep the bold ink (from `strong`), drop the slant */
+section::after {            /* page number — below the line, right; `n / total` */
+  content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
   padding: 0;                /* override Marp's `padding:inherit`, which would push it up by --pad */
   position: absolute; right: var(--pad); bottom: var(--foot-pad);
   height: var(--foot-y); display: flex; align-items: center; justify-content: flex-end;
